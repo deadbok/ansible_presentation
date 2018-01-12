@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RestQFX application and Docker integration</title>
+    <title>Ansible intrduktion</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -36,28 +36,58 @@ background-image: url(images/wallpaper.jpg)
 
 Martin Bo Kristensen Grønholdt
 ---
-
 background-image: url(images/wallpaper.jpg)
-#.center[Repository layout]
+#.center[Indhold]
 
-* Tower
-* Playbook
-* Tasks
-* Roles
+* Ansible overblik
+* Playbooks
 * Inventory
 * Host vars
 * Groups
 * Group vars
-* Live demo diagram (aka. nu bliver det vildt)
+* Tasks
 * Modules
-* Concrete walk through in editor
-* Execute the play
-* Show the VMs are as expected
+* Roles
+* Tower
+* Eksempel netværk
+---
+background-image: url(images/wallpaper.jpg)
+#.center[Ansible formål]
 
+* Shell scripting med standarder ;-)
+* Nemmere styr på inventory
+* Nemmere logisk opdeling i roller.
+* Regler skrives i YAML.
+* Moduler med funktioner til dvs. systemer
+  * Linux/Unix pakke styring
+  * Udrul konfigurationer til Juniper, Cisco osv..
+  * Juniper, Cisco osv. kommande udførsel.
+  * Templating af filer med Jinja2
+---
+background-image: url(images/wallpaper.jpg)
+#.center[Ansible struktur]
+
+.center[![:scale 80%](images/ansible-struct.png)]
+---
+background-image: url(images/wallpaper.jpg)
+#.center[Eksempel netværk]
+
+.center[![:scale 70%](images/ansible-network-l3.png "Layer 3")]
+<hr />
+&nbsp;
+.center[![:scale 45%](images/ansible-network-l2.png "Layer 2")]
     </textarea>
     <script src="remark.js" type="text/javascript">
     </script>
     <script type="text/javascript">
+      // Usage:
+      //   ![:scale 50%](image.jpg)
+      // Outputs:
+      //   <img src="image.jpg" style="width: 50%" />
+      remark.macros.scale = function (percentage) {
+        var url = this;
+        return '<img src="' + url + '" style="width: ' + percentage + '" />';
+      };
       var slideshow = remark.create();
     </script>
   </body>
