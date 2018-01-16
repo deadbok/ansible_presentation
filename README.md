@@ -2,7 +2,7 @@
 
 Introduction to Ansible with an example using Vagrant + VirtualBox + Ansible.
 
-The slide show uses [remark.js](https://github.com/gnab/remark). Just open
+The [slide show](https://deadbok.github.io/ansible_presentation/) uses [remark.js](https://github.com/gnab/remark). Just open
 `presenstation/index.html` in your browser.
 
 The example uses Vagrant to bring up the machines, but provisioning is
