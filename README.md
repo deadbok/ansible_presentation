@@ -17,26 +17,27 @@ decoupled to illustrate how to run Ansible on any existing machines.
 
 ## client-int
 
-* **Type**: xubuntu-16.04-desktop-amd64'
+* **Type**: debian-8-amd64-xfce
 * **Private IP**: 192.168.50.2
 * **Memory**: 1024MB
 
 ## client-ext
 
-* **Type:** xubuntu-16.04-desktop-amd64',
-* **Private IP**: 192.168.50.3',
+* **Type:** debian-8-amd64-xfce
+* **Private IP**: 192.168.50.3
 * **Memory**: 1024,
 
 ## server-web
 
 * **Type:** debian-stretch-amd64
-* **Private IP**: 192.168.50.4',
+* **Private IP**: 192.168.50.4
 * **Memory**: 512MB
 
 ## router-fw
 
 * **Type:** juniper-ffp-12.1X47-D15.4-packetmode
-* **Private IP**: 192.168.50.5',
+* **Private IP**: 192.168.50.5
+* **CPUs**: 2 (Important)
 
 # Live demo requirements
 
