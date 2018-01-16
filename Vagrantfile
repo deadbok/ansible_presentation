@@ -7,7 +7,7 @@ Vagrant.configure('2') do |config|
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
 
-  # This in array of all the machines that gets created.
+  # This is in array of all the machines that gets created.
   vms = [
     {
       :name => 'client-int',
@@ -24,7 +24,7 @@ Vagrant.configure('2') do |config|
       :private_ip => '192.168.50.3',
       :private_net_name => 'client-ext',
       :memory => 1024,
-      :cpus => 1,      
+      :cpus => 1,
       :gui => true,
     },
     {
@@ -33,7 +33,7 @@ Vagrant.configure('2') do |config|
       :private_ip => '192.168.50.3',
       :private_net_name => 'server-web',
       :memory => 512,
-      :cpus => 1,      
+      :cpus => 1,
       :gui => false,
     },
     {
@@ -42,7 +42,7 @@ Vagrant.configure('2') do |config|
       :private_ip => '192.168.50.3',
       :private_net_name => 'router-fw',
       :memory => 512,
-      :cpus => 2,      
+      :cpus => 2,
       :gui => false,
     }
   ]
@@ -55,7 +55,7 @@ Vagrant.configure('2') do |config|
       machine.vm.network 'private_network',
                           ip: machine_def[:private_ip],
                           virtualbox__intnet: machine_def[:private_net_name]
-      
+
       # Only do provider settings if there are any in the definition.
       config.vm.provider "virtualbox" do |vb|
         if machine_def.key?(:memory)
