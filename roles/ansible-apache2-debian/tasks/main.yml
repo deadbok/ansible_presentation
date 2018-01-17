@@ -8,7 +8,6 @@
   with_items:
     - apache2
     - ufw
-    - open-vm-tools
     - mc
     - nano
     - git

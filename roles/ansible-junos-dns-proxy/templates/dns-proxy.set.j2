@@ -1,0 +1,9 @@
+set system name-server {{ nameserver }}
+
+{% for interface in dns-proxy_interfaces %}
+set system services dns dns-proxy interface {{ interface }}
+{% endfor %}
+set system services dns dns-proxy default-domain * forwarders 8.8.8.8
+{% for cache_entry in dns-proxy_cache_entries %}
+set system services dns dns-proxy cache {{ cache_entry['host'] }} inet {{ cache_entry['ip'] }}
+{% endfor %}

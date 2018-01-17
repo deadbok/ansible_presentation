@@ -80,12 +80,13 @@ Vagrant.configure('2') do |config|
     machine.vm.box = "juniper/ffp-12.1X47-D15.4-packetmode"
     machine.vm.hostname = "router-fw"
     machine.vm.network 'private_network',
-                        ip: '192.168.50.3',
+                        ip: '192.168.50.2',
                         virtualbox__intnet: "int-net"
     machine.vm.network 'private_network',
-                        ip: '192.168.60.3',
+                        ip: '192.168.60.2',
                         virtualbox__intnet: "ext-net"
     machine.vm.network :forwarded_port, guest: 22, host: 2263, id: 'ssh'
+    machine.vm.network :forwarded_port, guest: 830, host: 8300, id: 'netconf'
     config.vm.provider "virtualbox" do |vb|
       vb.cpus = 2
     end

@@ -64,3 +64,10 @@ To install these run:
     vagrant plugin install vagrant-hostmanager
     vagrant plugin install vagrant-junos
     vagrant plugin install vagrant-host-shell
+
+## Ansible
+
+Ansible needs the JunOS module to control the vSRX in the network. To install
+the module run:
+
+    ansible-galaxy install Juniper.junos

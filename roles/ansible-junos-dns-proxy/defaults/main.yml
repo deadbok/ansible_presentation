@@ -1,0 +1,5 @@
+dns-proxy_interfaces:
+    - ge-0/0/1
+
+dns-proxy_cache_entries:
+    - { host: web.example.com, ip: 192.168.50.3 }

@@ -9,4 +9,10 @@
 - hosts: webservers
   roles:
     - ansible-apache2-debian
+
+- hosts: router-fw
+  roles:
+    - ansible-junos-nameserver
+    - ansible-junos-dns-proxy
+
 ...
