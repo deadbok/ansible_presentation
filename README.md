@@ -3,15 +3,15 @@
 Introduction to Ansible with an example using Vagrant + VirtualBox + Ansible.
 
 The [slide show](https://deadbok.github.io/ansible_presentation/) uses [remark.js](https://github.com/gnab/remark). Just open
-`presenstation/index.html` in your browser or navigate to [https://github.com/deadbok/ansible_presentation](https://github.com/deadbok/ansible_presentation).
+`presenstation/index.html` in your browser or navigate to [https://deadbok.github.io/ansible_presentation/](https://deadbok.github.io/ansible_presentation/).
 
 The example uses Vagrant to bring up the machines, but provisioning is
 decoupled to illustrate how to run Ansible on any existing machines.
 
 # Content
 
-* `docs/*`: The slides, done in remark.js.
-* `Vagrantfile`: Vagrant machine definitions to bring up the VMs.
+* [docs/*](./docs): The slides, done in remark.js.
+* [Vagrantfile](./Vagrantfile)]: Vagrant machine definitions to bring up the VMs.
 
 # VMs
 
