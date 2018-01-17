@@ -55,9 +55,9 @@ Router that sits between the external and the internal network.
 Vagrant and VirtualBox is used to bring up the virtual machines. Vagrant needs
 the following plug-ins for the demonstration:
 
-    * hostmanager
-    * junos
-    * host-shell
+* hostmanager
+* junos
+* host-shell
 
 To install these run:
 
