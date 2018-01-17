@@ -1,3 +1,5 @@
+require 'pp'
+
 Vagrant.configure('2') do |config|
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
@@ -12,6 +14,7 @@ Vagrant.configure('2') do |config|
       :box => 'remram/debian-8-amd64-xfce',
       :private_ip => '192.168.50.4',
       :private_net_name => 'int-net',
+      :ssh_port => 2260,
       :memory => 1024,
       :cpus => 1,
       :gui => true,
@@ -21,6 +24,7 @@ Vagrant.configure('2') do |config|
       :box => 'remram/debian-8-amd64-xfce',
       :private_ip => '192.168.60.3',
       :private_net_name => 'ext-net',
+      :ssh_port => 2261,
       :memory => 1024,
       :cpus => 1,
       :gui => true,
@@ -30,6 +34,7 @@ Vagrant.configure('2') do |config|
       :box => 'debian/stretch64',
       :private_ip => '192.168.50.3',
       :private_net_name => 'int-net',
+      :ssh_port => 2262,
       :memory => 512,
       :cpus => 1,
       :gui => false,
@@ -48,7 +53,11 @@ Vagrant.configure('2') do |config|
       end
       if machine_def.key?(:public_ip)
         machine.vm.network 'public_network',
-                            ip: machine_def[:private_ip]
+                            ip: machine_def[:public_ip]
+      end
+
+      if machine_def.key?(:ssh_port)
+        machine.vm.network :forwarded_port, guest: 22, host: machine_def[:ssh_port], id: 'ssh'
       end
 
       # Only do provider settings if there are any in the definition.
@@ -65,14 +74,21 @@ Vagrant.configure('2') do |config|
       end
     end
   end
+
+  # Bring up the router-fwvms.each do |machine_def|
   config.vm.define "router-fw" do |machine|
-    machine.vm.box = 'juniper/ffp-12.1X47-D15.4-packetmode'
-    machine.vm.hostname = 'router-fw'
+    machine.vm.box = "juniper/ffp-12.1X47-D15.4-packetmode"
+    machine.vm.hostname = "router-fw"
     machine.vm.network 'private_network',
-                        ip: "192.168.50.2",
+                        ip: '192.168.50.3',
                         virtualbox__intnet: "int-net"
     machine.vm.network 'private_network',
-                        ip: "192.168.60.2",
+                        ip: '192.168.60.3',
                         virtualbox__intnet: "ext-net"
+    machine.vm.network :forwarded_port, guest: 22, host: 2263, id: 'ssh'
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = 2
+    end
   end
+
 end

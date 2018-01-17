@@ -45,7 +45,7 @@
   become: yes
 
 - name: Disable default site
-  command: a2ensite 000-default
+  command: a2dissite 000-default
   args:
     removes: /etc/apache2/sites-enabled/{{ apache2_domain }}.conf
   become: yes
@@ -67,10 +67,17 @@
     dest: "/tmp/{{ apache2_domain }}"
     update: no
 
+- name: Create site root dir
+  file:
+    path: /var/www/{{ apache2_domain }}
+    recurse: True
+    state: directory
+  become: yes
+
 - name: Copy site into place
   synchronize:
-    src: "/tmp/{{ apache2_domain }}"
-    dest: "/var/www/."
+    src: "/tmp/{{ apache2_domain }}/docs/"
+    dest: "/var/www/{{ apache2_domain }}/."
   become: yes
   delegate_to: "{{ inventory_hostname }}"
 

@@ -1,13 +1,12 @@
 ---
-- name: Setup time zone and install ntp and rsyslog on Debian systems
-  hosts: timezone
+
+- hosts: timezone
   vars:
       debian_timezone: "{{ timezone }}"
   roles:
-    - { role: timezone-debian, tags: ["timezone", "debian"]
+    - timezone-debian
 
-- name: Set up the web servers
-  hosts: webservers
+- hosts: webservers
   roles:
-    - { role: ansible-apache2-debian, tags: ["apache2", "webserver", "debian"] }
+    - ansible-apache2-debian
 ...

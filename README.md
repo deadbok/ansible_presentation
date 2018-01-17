@@ -11,7 +11,7 @@ decoupled to illustrate how to run Ansible on any existing machines.
 # Content
 
 * [docs/*](./docs): The slides, done in remark.js.
-* [Vagrantfile](./Vagrantfile)]: Vagrant machine definitions to bring up the VMs.
+* [Vagrantfile](./Vagrantfile): Vagrant machine definitions to bring up the VMs.
 
 # VMs
 
