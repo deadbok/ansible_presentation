@@ -1,0 +1,13 @@
+[webservers]
+server-web
+
+[clients]
+client-int
+client-ext
+
+[routers]
+router-fw
+
+[timezone:children]
+webservers
+clients

@@ -1,0 +1,22 @@
+- name: set system timezone
+  template:
+    src: etc_timezone.j2
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
+  register: timezone_change
+  when: ansible_distribution == "Debian"
+  become: yes
+
+- name: remove localtime file, if appl.
+  file:
+    dest: /etc/localtime
+    state: absent
+  when: timezone_change.changed and ansible_distribution == "Debian"
+  become: yes
+
+- name: update dpkg config
+  command: dpkg-reconfigure --frontend noninteractive tzdata
+  when: timezone_change.changed and ansible_distribution == "Debian"
+  become: yes

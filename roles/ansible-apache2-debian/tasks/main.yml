@@ -1,0 +1,84 @@
+---
+- name: Install packages
+  package:
+    name: "{{ item }}"
+    update_cache: yes
+    state: latest
+  become: yes
+  with_items:
+    - apache2
+    - ufw
+    - open-vm-tools
+    - mc
+    - nano
+    - git
+
+- name: Enable mod_rewrite
+  apache2_module: name=rewrite state=present
+  become: yes
+  notify:
+    - restart apache2
+
+- name: Apache2 listen on port {{ apache2_http_port }}
+  lineinfile:
+    dest: /etc/apache2/ports.conf
+    regexp: "^Listen "
+    line: "Listen {{ apache2_http_port }}"
+    state: present
+  become: yes
+  notify:
+    - restart apache2
+
+- name: Apache2 virtualhost on port {{ apache2_http_port }}
+  lineinfile:
+    dest: /etc/apache2/sites-available/000-default.conf
+    regexp: "^<VirtualHost \\*:"
+    line: "<VirtualHost *:{{ apache2_http_port }}>"
+  become: yes
+  notify:
+    - restart apache2
+
+- name: Create virtual host file
+  template:
+    src: virtualhost.conf.j2
+    dest: /etc/apache2/sites-available/{{ apache2_domain }}.conf
+  become: yes
+
+- name: Disable default site
+  command: a2ensite 000-default
+  args:
+    removes: /etc/apache2/sites-enabled/{{ apache2_domain }}.conf
+  become: yes
+  notify:
+    - restart apache2
+
+- name: Enable site {{ apache2_domain }}
+  command: a2ensite {{ apache2_domain }}
+  args:
+    creates: /etc/apache2/sites-enabled/{{ apache2_domain }}.conf
+  become: yes
+  notify:
+    - restart apache2
+
+- name: Clone site
+  git:
+    repo: "{{ apache2_site_git_url }}"
+    accept_hostkey: yes
+    dest: "/tmp/{{ apache2_domain }}"
+    update: no
+
+- name: Copy site into place
+  synchronize:
+    src: "/tmp/{{ apache2_domain }}"
+    dest: "/var/www/."
+  become: yes
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Open port 22 & 80 in ufw
+  ufw:
+    rule: allow
+    port: '{{ item }}'
+  become: yes
+  with_items:
+    - 22
+    - 80

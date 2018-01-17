@@ -1,0 +1,3 @@
+apache2_http_port: 80
+apache2_domain: group3.dk
+apache2_site_git_url: git@bitbucket.org:badasspngroup/website.git

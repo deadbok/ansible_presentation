@@ -1,0 +1,16 @@
+
+- name: Install NTP.
+  apt:
+    name: ntp
+    state: present
+  notify: restart ntp
+  when: ansible_distribution == "Debian"
+  become: yes
+
+- name: Enable the NTP daemon.
+  service:
+    name: ntp
+    state: started
+    enabled: yes
+  when: ansible_distribution == "Debian"
+  become: yes
