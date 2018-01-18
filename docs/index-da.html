@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Ansible introduction</title>
+    <title>Ansible introduktion</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <style type="text/css">
       @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
@@ -36,50 +36,50 @@ class: center, middle
 
 background-image: url(images/wallpaper.jpg)
 # Ansible
-## Introduction
+## Introduktion
 
 Martin Bo Kristensen Grønholdt
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
-#.center[Agenda]
+#.center[Indhold]
 
-* Introduction to Ansible
-* Walk through of the files in the included example
-* Ansible demonstration, deploying the example network.
+* Beskrivelse af Ansible.
+* Gennemgang af eksempel netværk og Ansible filer.
+* Demonstration af Ansible med eksempel netværk.
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
-#.center[Ansible purpose]
+#.center[Ansible formål]
 
-Automation of repeating tasks and aiding homogeneous configuration of machines.
-Ansible often uses SSH to run the tasks on the remote machines.
+Automatisering af gentagne trivielle opgaver. Homogen struktur på maskiner og
+konfigurationer. Ansible benytter i mange tilfælde SSH til at udføre opgaver på
+fjerne systemer.
 
-
-* Separate task in plays according to scope.
-* Better inventory control.
-* Logically split larger tasks into roles.
-* Fine tune a role using variables.
-* Ansible uses YAML syntax for most things.
-* Modules for various systems and tasks.
-  * Linux/Unix package management.
-  * Push configuration to Juniper, Cisco etc.
-  * Run command on Juniper, Cisco etc.
-  * Template configuration files using Jinja2.
+* Afgrænsning af opgaver i opskrifter.
+* Styr på inventory
+* Logisk opdeling i roller.
+* Tilpasning af rolle til host med variabler.
+* Regler skrives i YAML.
+* Moduler med funktioner til diverse systemer
+  * Linux/Unix pakke styring mv.
+  * Udrul konfigurationer til Juniper, Cisco osv..
+  * Juniper, Cisco osv. kommando udførsel.
+  * Templating af filer med Jinja2
 
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
-#.center[Ansible structure]
+#.center[Ansible struktur]
 
-.center[![:scale 80%](images/ansible-struct-en.png)]
+.center[![:scale 80%](images/ansible-struct-da.png)]
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
 #.center[Playbooks]
 
-Playbooks a recipes written in YAML, containing tasks, roles, and variables.
-Not all tasks in a playbook needs to apply to all hosts in the inventory.
+Playbooks er filer i YAML med "opskrifter" hvor opgaver, roller og variable er
+beskrevet. Ikke alle opgaver behøves udført på alle hosts.
 
 ---
 class: middle
@@ -87,12 +87,11 @@ background-image: url(images/wallpaper.jpg)
 #.center[Inventory]
 
 #### Hosts
-Are the host definitions.
+Indeholder definitioner for alle hosts en playbook vedrører.
 
-#### Host vars
-Used to control aspects of roles, tasks, and Ansible itself. For instance SSH
-access configuration or values used in a template to generate a configuration
-file.
+#### Host variable
+Disse styrer f.eks. SSH adgangs indstillinger eller indeholder
+værdier tilknyttet en template af en konfigurations fil.
 
 ---
 class: middle
@@ -100,11 +99,13 @@ background-image: url(images/wallpaper.jpg)
 #.center[Inventory - Groups]
 
 #### Groups
-You can grou Hosts. For instance have an snmp group and a web server group. The
-webserver group can then belong in the snmp group along with other hosts.
+Host kan grupperes. F.eks. en grupper med webservere og en snmp
+gruppe. Gruppen webservere kan også være i snmp gruppen, sammen
+med andre grupper.
 
-#### Group vars
-These are like host vars but applies to the scope of group instead of a host.
+#### Group variable
+Disse variable fungerer som host variable med den forskel at de
+gælder på gruppeniveau.
 
 ---
 class: middle
@@ -113,10 +114,10 @@ background-image: url(images/wallpaper.jpg)
 
 ###Tasks
 
-* The actual task that gets executed.
-* A task is often equal to a command in the shell. For instance `apt get install
-  ansible`.
-* Task uses modules with paramaters again like the command line.
+* Er selve opgaven der udføres.
+* En opgave svarer i kompleksitet ofte til
+  hvad der kan udføres med én kommando (ingen pipes :-) i shell.
+* En opgave kalder et modul med parametre.
 
 ---
 class: middle
@@ -125,12 +126,12 @@ background-image: url(images/wallpaper.jpg)
 
 ###Modules
 
-* Modules are the interface that executes the task.
-* Modules uses parameters.
-* Modules are specific
-  * Task (Install software)
-  * System (Execute commands on a router)
-  * Software (Execute SQL statements on a server)
+* Moduler udfører opgaver
+* Moduler tager parametre
+* Moduler er specifikke
+  * Opgave (Installere software)
+  * System (Udføre kommandoer på en router)
+  * Software (Udføre SQL kommandoer på en server)
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
@@ -138,16 +139,16 @@ background-image: url(images/wallpaper.jpg)
 
 ### Roles
 
-Roles are like libraries in programming, a way to split and group related tasks.
-A role can include:
+Roller giver mulighed for at dele sine scripts op i biblioteker. En rolle
+består af:
 
-* **tasks**: Tasks to execute.
-* **handlers**: Task that are executed when notified by other tasks (restart a service, etc.).
-* **templates**: File templates.
-* **files**: Static file.
-* **vars**: Fole variables with higher precedence.
-* **defaults**: Default variable values with lowest precedence.
-* **meta**: Role dependencies and other types of meta data.
+* **tasks**: Opgaver der skal udføres.
+* **handlers**: Opgaver som udøres når de notificeres fra tasks (genstart af service osv.).
+* **templates**: Fil templates.
+* **files**: Statiske file.
+* **vars**: Variable for rollen, med højere prioritet.
+* **defaults**: Standard værdier for rollen, med laveste prioritet.
+* **meta**: Rolle afhængigheder og andre meta data.
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
@@ -155,20 +156,19 @@ background-image: url(images/wallpaper.jpg)
 
 ### Tower
 
-Tower is a non-free front end for Ansible. Tower (like Ansible) is developed by
-RedHat.
+Tower er en betalt web frontend til Ansible også (Ansible) er udgivet af RedHat.
 
-Tower offers centralised control of inventory and roles. RedHat highlights the
-following advantages:
+Tower tilbyder centraliseret styring af inventory og roller. Redhat nævner
+følgende fordele:
 
-* Status of all hosts
-* User access control
+* Status af alle hosts
+* User access Kontrol
 * REST API
-* Push-button deployment
+* Push-button deployment (Et tryk for at starte job med de rette variable)
 ---
 class: split-40
 background-image: url(images/wallpaper.jpg)
-#.center[Exmple netværk]
+#.center[Eksempel netværk (aka. nu blir' det vildt ;-)]
 
 .column[
 .left[![:scale 60%](images/ansible-network-l3.png "Layer 3")]
@@ -177,17 +177,17 @@ background-image: url(images/wallpaper.jpg)
 ]
 .column[
 **Router**
-* Push DNS proxy configuration
+* Udrul DNS proxy konfiguration
 <br /><br />
 **Client**
-* Set time zone
-* Set resolver to point at the router
+* Sæt tidszone
+* Sæt resolver til at pege på router
 <br /><br />
 **Server**
-* Set time zone
+* Sæt tidszone
 * Installer Apache
-* Clone web side repository
-* Configure the web server
+* Klon web side repository
+* Konfigurer web server
 ]
 ---
 class: middle
