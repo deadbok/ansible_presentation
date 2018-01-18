@@ -72,6 +72,9 @@ class: middle
 background-image: url(images/wallpaper.jpg)
 #.center[Ansible struktur]
 
+Ansible benytter i mange tilfælde SSH til at udfører opgaver på fjerne
+systemer.
+
 .center[![:scale 80%](images/ansible-struct.png)]
 ---
 class: middle
@@ -145,6 +148,29 @@ background-image: url(images/wallpaper.jpg)
 Roller giver mulighed for at dele sine scripts op i biblioteker. En rolle
 består af:
 
+* **tasks**: Opgaver der skal udføres.
+* **handlers**: Opgaver som udøres når de notificeres fra tasks (genstart af service osv.).
+* **templates**: Fil templates.
+* **files**: Statiske file.
+* **vars**: Variable for rollen, med højere prioritet.
+* **defaults**: Standard værdier for rollen, med laveste prioritet.
+* **meta**: Rolle afhængigheder og andre meta data.
+---
+class: middle
+background-image: url(images/wallpaper.jpg)
+#.center[Tower]
+
+### Tower
+
+Tower er en betalt web frontend til Ansible også (Ansible) er udgivet af RedHat.
+
+Tower tilbyder centaliseret styring af ens inventory og roller. Redhat nævner
+følgende foredele:
+
+* Status af alle hosts
+* User access control
+* REST API
+* Push-button deployment (Et tryk for at starte job med de rette variable)
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
