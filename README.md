@@ -8,6 +8,11 @@ The [slide show](https://deadbok.github.io/ansible_presentation/) uses [remark.j
 The example uses Vagrant to bring up the machines, but provisioning is
 decoupled to illustrate how to run Ansible on any existing machines.
 
+The example is a private network with a Juniper vSRX abused as a DNS proxy,
+making a web server available at `web.example.com` in a Debian client running
+the XFCE desktop. The webserver, DNS proxy config, timezone, and resolver
+configuration is all done using Ansible.
+
 # Content
 
 * [docs/*](./docs): The slides, done in remark.js.
@@ -34,34 +39,26 @@ Then to deploy the software and settings using Ansible run:
 
 ## client-int
 
-Desktop machine inside the private network.
+Desktop machine to test the DNS and web server.
 
 * **Type**: debian-8-amd64-xfce
-* **Private IP**: 192.168.50.2
-* **Memory**: 1024MB
-
-## client-ext
-
-Desktop machine outside the private network.
-
-* **Type:** debian-8-amd64-xfce
-* **Private IP**: 192.168.50.3
+* **Private IP**: 192.168.50.4
 * **Memory**: 1024MB
 
 ## server-web
 
-Web server inside the private network.
+Web server.
 
 * **Type:** debian-stretch-amd64
-* **Private IP**: 192.168.50.4
+* **Private IP**: 192.168.50.3
 * **Memory**: 512MB
 
 ## router-fw
 
-Router that sits between the external and the internal network.
+Juniper router abused as a DNS proxy.
 
 * **Type:** juniper-ffp-12.1X47-D15.4-packetmode
-* **Private IP**: 192.168.50.5
+* **Private IP**: 192.168.50.2
 * **Memory**: 512MB
 * **CPUs**: 2 (Important)
 
