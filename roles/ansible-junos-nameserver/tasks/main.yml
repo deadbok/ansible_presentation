@@ -1,35 +1,7 @@
 ---
 
-#- name: Checking NETCONF connectivity
-#  wait_for: host=localhost port=8300 timeout=5
-
-# - name: Render name server Junos template
-#   template:
-#     src: nameserver.set.j2
-#     dest: "rendered/{{ inventory_hostname }}-nameserver.set"
-#
-# - name: Push name server configuration to the router
-#   junos_install_config:
-#     host=localhost
-#     user=vagrant
-#     passwd=vagrant
-#     logfile="logs/{{ inventory_hostname }}-nameserver-install-config.log"
-#     replace=yes
-#     overwrite=no
-#     file="rendered/{{ inventory_hostname }}-nameserver.set"
-#     comment="SNMP Configured by ansible"
-#     diffs_file="diffs/{{ inventory_hostname }}-nameserver-{{ lookup('pipe', 'date +%d%m-%H%M%S') }}.diff"
-
-- name: Set nameserver on JunOS device
-  juniper_junos_command:
-      host: "localhost"
-      port: "8300"
-      user: "root"
-      passwd: "Juniper"
-      commands:
+- name: Set nameserver on JunOS the device
+  juniper_junos_config:
+      provider: "{{ netconf }}"
+      lines:
           - "set system name-server {{ nameserver }}"
-  register: reponse
-
-- name: Print the command JunOS output
-  debug:
-      var: response.stdout

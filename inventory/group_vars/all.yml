@@ -1,9 +1,9 @@
 timezone: Europe/Copenhagen
 
-nameserver: "fd00:0:3:40::3"
+nameserver: 9.9.9.9
 
 apache2_http_port: 80
-apache2_domain: example.com
+apache2_domain: web.example.com
 apache2_site_git_url: https://github.com/deadbok/ansible_presentation
 
 ansible_become_user: root

@@ -1,0 +1,5 @@
+netconf:
+  host: "localhost"
+  port: "8300"
+  username: "root"
+  password: "Juniper"

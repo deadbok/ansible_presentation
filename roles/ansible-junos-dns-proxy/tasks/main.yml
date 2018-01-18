@@ -1,19 +1,11 @@
-- name: Checking NETCONF connectivity
-  wait_for: host=localhost port=8300 timeout=5
-
-- name: Render name server Junos template
+---
+- name: Render DNS proxy JunOS template
   template:
     src: dns-proxy.set.j2
     dest: "rendered/{{ inventory_hostname }}-dns-proxy.set"
 
 - name: Push DNS proxy server configuration to Junos devices
-  junos_install_config:
-    host=localhost
-    user=vagrant
-    passwd=vagrant
-    logfile="logs/{{ inventory_hostname }}-dns-proxy-install-config.log"
-    replace=yes
-    overwrite=no
-    file="rendered/{{ inventory_hostname }}-dns-proxy.set"
-    comment="DNS proxy Configured by ansible"
-    diffs_file="diffs/{{ inventory_hostname }}-dns-proxy-{{ lookup('pipe', 'date +%d%m-%H%M%S') }}.diff"
+  juniper_junos_config:
+    provider: "{{ netconf }}"
+    load: 'set'
+    src: "rendered/{{ inventory_hostname }}-dns-proxy.set"

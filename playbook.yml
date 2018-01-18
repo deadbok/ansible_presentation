@@ -6,6 +6,10 @@
   roles:
     - timezone-debian
 
+- hosts: client-int
+  roles:
+    - ansible-dns-debian
+
 - hosts: webservers
   roles:
     - ansible-apache2-debian
