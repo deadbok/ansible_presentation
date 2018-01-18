@@ -56,6 +56,10 @@ class: middle
 background-image: url(images/wallpaper.jpg)
 #.center[Ansible formål]
 
+Automatisering af gentagne trivielle opgaver. Homogen struktur på maskiner og
+konfigurationer. Ansible benytter i mange tilfælde SSH til at udføre opgaver på
+fjerne systemer.
+
 * Afgrænsning af opgaver i opskrifter.
 * Styr på inventory
 * Logisk opdeling i roller.
@@ -64,7 +68,7 @@ background-image: url(images/wallpaper.jpg)
 * Moduler med funktioner til diverse systemer
   * Linux/Unix pakke styring mv.
   * Udrul konfigurationer til Juniper, Cisco osv..
-  * Juniper, Cisco osv. kommande udførsel.
+  * Juniper, Cisco osv. kommando udførsel.
   * Templating af filer med Jinja2
 
 ---
@@ -72,16 +76,13 @@ class: middle
 background-image: url(images/wallpaper.jpg)
 #.center[Ansible struktur]
 
-Ansible benytter i mange tilfælde SSH til at udfører opgaver på fjerne
-systemer.
-
 .center[![:scale 80%](images/ansible-struct.png)]
 ---
 class: middle
 background-image: url(images/wallpaper.jpg)
 #.center[Playbooks]
 
-Playbooks er filer i YAML med "opskrifter" hvor opgaver, roller og variable er
+Playbooks er filer i YAML med "opskrifter" hvor opgaver, roller og variable er 
 beskrevet. Ikke alle opgaver behøves udført på alle hosts.
 
 ---
@@ -93,7 +94,7 @@ background-image: url(images/wallpaper.jpg)
 Indeholder definitioner for alle hosts en playbook vedrører.
 
 #### Host variable
-Disse styrer f.eks. SSH adgangs indstillinger eller indeholder
+Disse styrer f.eks. SSH adgangs indstillinger eller indeholder 
 værdier tilknyttet en template af en konfigurations fil.
 
 ---
@@ -107,7 +108,7 @@ gruppe. Gruppen webservere kan også være i snmp gruppen, sammen
 med andre grupper.
 
 #### Group variable
-Disse variable fungerer som host variable med den forskel at de
+Disse variable fungerer som host variable med den forskel at de 
 gælder på gruppeniveau.
 
 ---
@@ -164,11 +165,11 @@ background-image: url(images/wallpaper.jpg)
 
 Tower er en betalt web frontend til Ansible også (Ansible) er udgivet af RedHat.
 
-Tower tilbyder centaliseret styring af ens inventory og roller. Redhat nævner
-følgende foredele:
+Tower tilbyder centraliseret styring af inventory og roller. Redhat nævner 
+følgende fordele:
 
 * Status af alle hosts
-* User access control
+* User access Kontrol
 * REST API
 * Push-button deployment (Et tryk for at starte job med de rette variable)
 ---
