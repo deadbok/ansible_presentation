@@ -12,7 +12,9 @@
 
 - hosts: router-fw
   roles:
+    - Juniper.junos
     - ansible-junos-nameserver
     - ansible-junos-dns-proxy
+  connection: local
 
 ...

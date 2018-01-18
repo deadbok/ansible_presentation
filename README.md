@@ -70,4 +70,6 @@ To install these run:
 Ansible needs the JunOS module to control the vSRX in the network. To install
 the module run:
 
+    pip3 install junos-eznc
+    pip3 install jxmlease
     ansible-galaxy install Juniper.junos

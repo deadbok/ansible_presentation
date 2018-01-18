@@ -4,3 +4,5 @@ dns-proxy_interfaces:
 dns-proxy_cache_entries:
     - { host: web.example.com, ip: 192.168.50.3 }
     - { host: client.example.com, ip: 192.168.50.4 }
+
+nameserver: 9.9.9.9
