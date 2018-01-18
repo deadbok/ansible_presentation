@@ -11,7 +11,24 @@ decoupled to illustrate how to run Ansible on any existing machines.
 # Content
 
 * [docs/*](./docs): The slides, done in remark.js.
+* [inventory/*](./inventory): Ansible inventory.
+* [rendered/*](./rendered): Rendered configuration templates for JunOS devices.
+* [roles/*](./roles): Ansible Roles.
+* [deploy.sh](./deploy.sh): Script to run Ansible on the VMs
+* [playbook.yml](./playbook.yml): Ansible example playbook.
 * [Vagrantfile](./Vagrantfile): Vagrant machine definitions to bring up the VMs.
+
+
+# Running
+
+To create the VMs for the example run this command from the root of the
+project:
+
+    vagrant up
+
+Then to deploy the software and settings using Ansible run:
+
+    ./deploy.sh
 
 # VMs
 
@@ -70,6 +87,9 @@ To install these run:
 Ansible needs the JunOS module to control the vSRX in the network. To install
 the module run:
 
-    pip3 install junos-eznc
     pip3 install jxmlease
+    pip3 install junos-eznc
     ansible-galaxy install Juniper.junos
+
+Depending on your default Python version and distribution you might need to use
+`pip` (for Python 2) instead of `pip3`.
