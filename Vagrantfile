@@ -20,16 +20,6 @@ Vagrant.configure('2') do |config|
       :gui => true,
     },
     {
-      :name => 'client-ext',
-      :box => 'remram/debian-8-amd64-xfce',
-      :private_ip => '192.168.60.3',
-      :private_net_name => 'ext-net',
-      :ssh_port => 2261,
-      :memory => 1024,
-      :cpus => 1,
-      :gui => true,
-    },
-    {
       :name => 'server-web',
       :box => 'debian/stretch64',
       :private_ip => '192.168.50.3',
@@ -52,12 +42,17 @@ Vagrant.configure('2') do |config|
                             virtualbox__intnet: machine_def[:private_net_name]
       end
       if machine_def.key?(:public_ip)
-        machine.vm.network 'public_network',
-                            ip: machine_def[:public_ip]
+        if machine_def[:public_ip] == "dhcp"
+          machine.vm.network 'public_network'
+        else
+          machine.vm.network 'public_network',
+                              ip: machine_def[:public_ip]
+        end
       end
 
       if machine_def.key?(:ssh_port)
-        machine.vm.network :forwarded_port, guest: 22, host: machine_def[:ssh_port], id: 'ssh'
+        machine.vm.network :forwarded_port, guest: 22,
+                           host: machine_def[:ssh_port], id: 'ssh'
       end
 
       # Only do provider settings if there are any in the definition.
@@ -82,10 +77,7 @@ Vagrant.configure('2') do |config|
     machine.vm.network 'private_network',
                         ip: '192.168.50.2',
                         virtualbox__intnet: "int-net"
-    machine.vm.network 'private_network',
-                        ip: '192.168.60.2',
-                        virtualbox__intnet: "ext-net"
-    machine.vm.network :forwarded_port, guest: 22, host: 2263, id: 'ssh'
+   machine.vm.network :forwarded_port, guest: 22, host: 2263, id: 'ssh'
     machine.vm.network :forwarded_port, guest: 830, host: 8300, id: 'netconf'
     config.vm.provider "virtualbox" do |vb|
       vb.cpus = 2

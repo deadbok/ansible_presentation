@@ -3,7 +3,6 @@ server-web
 
 [clients]
 client-int
-client-ext
 
 [routers]
 router-fw
